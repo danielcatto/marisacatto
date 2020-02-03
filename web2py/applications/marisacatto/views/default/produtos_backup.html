@@ -1,0 +1,15 @@
+{{extend 'base.html'}}
+
+{{block central}}
+<H1>Lista de Produtos</H1>
+<table border="1" width="800x" align="center">
+{{for produto in produtos:}}
+<tr align="left">
+	<td width="75px">Nome</td>
+    <td><a href="{{=URL('detalhe_produto', args=produto.id)}}"> {{=produto.nome}}</a></td>
+
+</tr>
+{{pass}}
+</table>
+
+{{end}}

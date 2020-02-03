@@ -1,0 +1,20 @@
+
+{{extend 'base.html'}}
+
+{{block central}}
+informe um valor para data
+<br>
+{{=form}}
+
+
+valor inicial: {{=resultado[0]}}<br>
+Perimetro: {{=resultado[1]}}<br>
+Área: {{=resultado[2]}}<br> 
+
+funcao: {{=a[0]}} {{=a[1]}}
+<br>
+
+Número de visitas: {{=counter}}
+<br>
+Carrinho: {{=session.carrinho}}
+{{end}}
