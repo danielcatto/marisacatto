@@ -206,16 +206,16 @@ Produtos.data_cadastro.requires=IS_NOT_EMPTY()
 
 #Tabela de vendas
 Vendas =  db.define_table('vendas',
+                            Field('cliente_id', 'integer'),
                             Field('nome', 'string'),
-                            Field('valor', 'float'),
+                            Field('produto_codigo', 'integer'),
                             Field('quantidade', 'integer'),                        
-                            Field('total', 'float'),
-                            Field('divida_ativa', 'boolean')
+                            Field('total_compra', 'float'),
+                            Field('forma_pagamento', 'string'),
+                            Field('status', 'boolean')
+                            
                             )
 
-Recebimentos = db.define_table('recebimentos',
-                            Field('codigo_clientes','integer'),
-                            Field('forma_pagemento', 'string'),
-                            Field('valor' 'float')
 
-                            )
+
+        

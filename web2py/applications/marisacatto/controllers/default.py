@@ -160,7 +160,8 @@ def itens_compras():
     pass
 
 
-@auth.requires_login()
+
+#@auth.requires_login()
 def vender():
     cart=tuple()
     if not session.carrinho:
@@ -171,6 +172,7 @@ def vender():
         Field('codigo', requires=IS_NOT_EMPTY(), label='Código'),
         Field('quantidade',requires=IS_NOT_EMPTY())
         )
+        
 
     if form.process().accepted:
         produtos = db(Produtos.id == form.vars.codigo).select()
@@ -190,6 +192,25 @@ def vender():
         produtos = 'vazio'
     print(type(produtos))
     return dict(form=form)
+
+
+
+
+def sale():
+    query = ''
+    form = SQLFORM.factory(
+        Field('codigo', requires=IS_NOT_EMPTY(), label='Código')
+        )
+    if form.process().accepted:
+        query = db(Clientes.id == form.vars.codigo).select()
+        if query:
+            nome = query[0]['nome']
+    print(query)
+    return dict(query=query, form=form) 
+
+
+
+
 
 def finalizar():
     pass

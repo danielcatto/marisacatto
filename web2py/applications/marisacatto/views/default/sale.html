@@ -1,0 +1,15 @@
+{{extend 'base.html'}}
+{{block central}}
+
+{{ =form }}
+
+{{ for i in query: }}
+    <h3>Cliente</h3>
+    <p>Codigo: {{ =i.id }} RG: {{ =i.rg }} Nome: {{ =i.nome }}</p>
+    <h3>Produtos</h3>
+
+{{pass}}
+
+
+
+{{end}}

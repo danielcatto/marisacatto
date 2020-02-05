@@ -103,3 +103,44 @@ CREATE TABLE "recebimentos"(
     "valorfloat" CHAR(512)
 );
 success!
+timestamp: 2020-02-05T19:22:33.324951
+ALTER TABLE "vendas" ADD "cliente_id" INTEGER;
+timestamp: 2020-02-05T19:22:33.399926
+ALTER TABLE "vendas" ADD "produto_codigo" INTEGER;
+timestamp: 2020-02-05T19:22:33.448871
+ALTER TABLE "vendas" ADD "total_compra" DOUBLE;
+timestamp: 2020-02-05T19:22:33.498171
+ALTER TABLE "vendas" ADD "forma_pagamento" CHAR(512);
+timestamp: 2020-02-05T19:22:33.547879
+ALTER TABLE "vendas" ADD "status" CHAR(1);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
