@@ -1,4 +1,4 @@
 routers = dict(
-BASE = dict(default_application='conacomp',
+BASE = dict(default_application='marisacatto',
 default_controller='default'),
 )

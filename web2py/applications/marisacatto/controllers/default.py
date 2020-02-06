@@ -95,53 +95,6 @@ def download():
     """
     return response.download(request, db)
 
-
-
-# ---- novo controles --- ##
-###########################################
-############## CLIENTES ###################
-###########################################
-
-
-
-
-@auth.requires_login()
-def cadastro_cliente():
-    form = SQLFORM(Clientes)
-    if form.process().accepted:
-        session.flash = 'Cliente Cadastrado'
-        redirect(URL('clientes'))
-    elif form.errors:
-        response.flash = "Erro"
-    else:
-        response.flash = "Preencha todos os campos"
-    return dict(form=form)
-
-#lista todos os clientes
-@auth.requires_login()
-def clientes():
-    clientes = db(Clientes).select()
-    return dict(clientes=clientes)
-
-@auth.requires_login()
-def detalhar_cliente():
-    cli = db(Clientes.id == request.args(0)).select()
-    return dict(cli=cli)
-
-@auth.requires_login()
-def editar_cliente():
-    form = SQLFORM(Clientes, request.args(0))
-    if form.process().accepted:
-        session.flash = "Cliente atualizado"
-        
-    elif form.errors:
-        response.flash = "Erros no formulário"
-    else:
-        if not response.flash:
-            response.flash = "Preencha o formulário"
-    return dict(form=form)
-
-
 def login():
     return dict(login=login)
 
@@ -193,9 +146,6 @@ def vender():
     print(type(produtos))
     return dict(form=form)
 
-
-
-
 def sale():
     query = ''
     form = SQLFORM.factory(
@@ -208,24 +158,10 @@ def sale():
     print(query)
     return dict(query=query, form=form) 
 
-
-
-
-
-def finalizar():
-    pass
-
-#movimentação do caixa
-@auth.requires_login()
-def caixa():
-    return dict(caixa=caixa)
-
-
 #teste com data 
-@auth.requires_login()
-def contado_data():
+def contando_data():
 
-    ano= 2019       #formato AAA
+    ano= 2020       #formato AAA
     mes=  5       #usar numeros
     dia= 22
     import datetime
@@ -241,71 +177,4 @@ def contado_data():
 
     resultado_delta = delta.days
 
-    return resultado_delta
-
-
-###########################################
-############## PRODUTOS####################
-###########################################
-@auth.requires_login()
-def cadastro_produto():
-    form = SQLFORM(Produtos)
-
-    if form.process().accepted:
-        session.flash = 'Produto Cadastrado'
-        redirect(URL('produtos'))
-    elif form.errors:
-        response.flash = "Erro"
-    else:
-        response.flash = "Preencha todos os campos"
-    return dict(form=form)
-
-@auth.requires_login()
-def produtos():
-    produtos = db(Produtos).select()
-
-    return dict(produtos=produtos)
-
-
-@auth.requires_login()
-def detalhe_produto():
-    produtos = db(Produtos.id == request.args(0)).select()
-    return dict(produtos=produtos)
-
-
-@auth.requires_login()
-def editar_produto():
-    form = SQLFORM(Produtos, request.args(0))
-    if form.process().accepted:
-        session.flash = "Produto atualizado"
-
-        
-    elif form.errors:
-        response.flash = "Erros no formulário"
-    else:
-        if not response.flash:
-            response.flash = "Preencha o formulário"
-    return dict(form=form)
-
-
-@auth.requires_login()
-def gerenciar_produtos():
-    return dict(produtos=produtos)
-
-@auth.requires_login()
-def categorias():
-    categorias = db(Categorias).select()
-    return dict(categorias=categorias)
-
-
-@auth.requires_login()
-def cadastro_categorias():
-    form = SQLFORM(Categorias)
-    if form.process().accepted:
-        session.flash = 'Nova categoria cadastrada: %s' % form.vars.nome_categoria
-        redirect(URL('categorias'))
-    elif form.errors:
-        response.flash = "Erro"
-    else:
-        response.flash = "Preencha todos os campos"
-    return dict(form=form)
+    return dict(resultado_delta=resultado_delta, ano=ano, mes=mes, dia=dia)

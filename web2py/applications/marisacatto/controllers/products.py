@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 def index():
-    return dict(produtos=produtos)
+    return dict(index=index)
 
 
 def show_products():
@@ -12,7 +12,7 @@ def show_products():
     return locals()
     
 @auth.requires_login()
-def cadastro_produto():
+def product_registration():
     form = SQLFORM(Produtos)
 
     if form.process().accepted:
@@ -25,20 +25,20 @@ def cadastro_produto():
     return dict(form=form)
 
 @auth.requires_login()
-def produtos():
+def product():
     produtos = db(Produtos).select()
 
     return dict(produtos=produtos)
 
 
 @auth.requires_login()
-def detalhe_produto():
+def product_detail():
     produtos = db(Produtos.id == request.args(0)).select()
     return dict(produtos=produtos)
 
 
 @auth.requires_login()
-def editar_produto():
+def product_edit():
     form = SQLFORM(Produtos, request.args(0))
     if form.process().accepted:
         session.flash = "Produto atualizado"
@@ -53,21 +53,21 @@ def editar_produto():
 
 
 @auth.requires_login()
-def gerenciar_produtos():
+def product_manager():
     return dict(produtos=produtos)
 
 @auth.requires_login()
-def categorias():
+def category():
     categorias = db(Categorias).select()
     return dict(categorias=categorias)
 
 
 @auth.requires_login()
-def cadastro_categorias():
+def category_registration():
     form = SQLFORM(Categorias)
     if form.process().accepted:
         session.flash = 'Nova categoria cadastrada: %s' % form.vars.nome_categoria
-        redirect(URL('categorias'))
+        redirect(URL('category'))
     elif form.errors:
         response.flash = "Erro"
     else:
