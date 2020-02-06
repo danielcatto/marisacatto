@@ -16,6 +16,7 @@
         <img src="{{=URL('default', 'download', args=produto.imagemdoproduto)}}" width="150px" height="150">
         <h3><a href="{{=URL('detalhe_produto', args=produto.id)}}"> {{=produto.nome}}</a></h3>
         <p>{{=produto.valor}} </p>
+        <p>{{=produto.categoria.nome_categoria}} </p>
         <p><a href="#" class="btn btn-primary" role="button">Comprar Agora</a> 
         
       </div>

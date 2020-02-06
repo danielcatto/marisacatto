@@ -197,6 +197,7 @@ Produtos = db.define_table('produtos',
                             Field('data_cadastro', 'datetime', default=request.now),                           
                             Field('categoria', 'reference categorias')
                             )
+                            
 Produtos.nome.requires=IS_NOT_EMPTY()
 Produtos.valor.requires=IS_NOT_EMPTY()
 Produtos.quantidade.requires=IS_NOT_EMPTY()

@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
 def index():
-    produtos = db(Produtos).select()
-
     return dict(produtos=produtos)
 
+
+def show_products():
+    if request.vars.category:
+        product_list = db(db.product.default_category == request.vars.category).select(limitby=(0,20),
+                                                                            orderby=db.product.name)
+    else:
+        product_list = db(db.product).select(limitby=(0,20), orderby=~db.product.name)
+    return locals()
+    
 @auth.requires_login()
 def cadastro_produto():
     form = SQLFORM(Produtos)
