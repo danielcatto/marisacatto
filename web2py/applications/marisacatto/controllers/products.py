@@ -26,7 +26,7 @@ def product_registration():
 
 @auth.requires_login()
 def product():
-    produtos = db(Produtos).select()
+    produtos = db(Produtos.id == 7).select()
 
     return dict(produtos=produtos)
 

@@ -11,6 +11,10 @@
 
 {{pass}}
 
+{{=form_product}}
 
-
+{{ for product in product_query: }}
+    <h3>Cliente</h3>
+    <p>Codigo: {{ =product.nome }} <Br>
+{{pass}}
 {{end}}

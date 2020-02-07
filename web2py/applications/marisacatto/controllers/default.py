@@ -148,15 +148,25 @@ def vender():
 
 def sale():
     query = ''
+    product_query=''
+
     form = SQLFORM.factory(
         Field('codigo', requires=IS_NOT_EMPTY(), label='Código')
         )
-    if form.process().accepted:
+
+    form_product = SQLFORM.factory(
+        Field('product_id', requires=IS_NOT_EMPTY(), label='codigo produto')
+        )
+
+
+    if form.process(formname='form').accepted:
         query = db(Clientes.id == form.vars.codigo).select()
-        if query:
-            nome = query[0]['nome']
-    print(query)
-    return dict(query=query, form=form) 
+      
+ 
+    if form_product.process(formname='form_product').accepted:
+        product_query = db(Produtos.id == form_product.vars.product_id).select()
+        
+    return dict(form=form, form_product=form_product, product_query=product_query, query=query) 
 
 #teste com data 
 def contando_data():
