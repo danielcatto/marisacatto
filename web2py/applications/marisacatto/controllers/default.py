@@ -147,26 +147,57 @@ def vender():
     return dict(form=form)
 
 def sale():
+    if not session.cart:
+        session.cart = list()
     query = ''
     product_query=''
-
+    product = tuple()
+    
+    
+    
+    
     form = SQLFORM.factory(
         Field('codigo', requires=IS_NOT_EMPTY(), label='Código')
         )
 
     form_product = SQLFORM.factory(
-        Field('product_id', requires=IS_NOT_EMPTY(), label='codigo produto')
+        Field('product_id', requires=IS_NOT_EMPTY(), label='Código produto'),
+        Field('quantidade', requires=IS_NOT_EMPTY(), label='Quantidade')
         )
 
 
     if form.process(formname='form').accepted:
         query = db(Clientes.id == form.vars.codigo).select()
+        if query:
+            customer = query
+            print('cuuuustumer ', customer[0]['id'])
+            session.cliente = customer[0]['id']
+        else:
+            print('não encontrado')
       
  
     if form_product.process(formname='form_product').accepted:
         product_query = db(Produtos.id == form_product.vars.product_id).select()
+        quantidade = form_product.vars.quantidade
+        if product_query:
+            for i in range(len(product_query)):
+                #print(product_query[i]['id'])
+                #print(product_query[i]['valor'])
+                total = float(product_query[i]['valor']) * int(quantidade)
+                #print(total)
+                product = (product_query[i]['id'], product_query[i]['valor'], quantidade, total)
+                #print(product)
+                session.cart.append(product)
+                print(len(session.cart))
+                for i in session.cart:
+                    print(i, '\n')
+        else:
         
-    return dict(form=form, form_product=form_product, product_query=product_query, query=query) 
+            print('falhou')
+                
+
+                 
+    return dict(form=form, form_product=form_product, product_query=product_query) 
 
 #teste com data 
 def contando_data():

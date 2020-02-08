@@ -1,20 +1,18 @@
 {{extend 'base.html'}}
 {{block central}}
 
+{{ if session.cliente:}}
+{{else:}}
 {{ =form }}
-
-{{ for i in query: }}
-    <h3>Cliente</h3>
-    <p>Codigo: {{ =i.id }} <Br>
-    Nome: {{ =i.nome }}RG: {{ =i.rg }} </p>
-    <h3>Produtos</h3>
-
 {{pass}}
-
+{{ =session.cliente}}
+{{ =session.cart }}
 {{=form_product}}
 
 {{ for product in product_query: }}
-    <h3>Cliente</h3>
+    <h3>Produto
+
+    </h3>
     <p>Codigo: {{ =product.nome }} <Br>
 {{pass}}
 {{end}}
