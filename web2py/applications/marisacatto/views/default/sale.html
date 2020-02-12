@@ -1,18 +1,37 @@
 {{extend 'base.html'}}
 {{block central}}
 
-{{ if session.cliente:}}
-{{else:}}
-{{ =form }}
+{{ if not session.cliente:}}
+    {{ =form }}
 {{pass}}
-{{ =session.cliente}}
-{{ =session.cart }}
+
+
 {{=form_product}}
 
-{{ for product in product_query: }}
-    <h3>Produto
 
-    </h3>
-    <p>Codigo: {{ =product.nome }} <Br>
-{{pass}}
+
+Cliente: {{ =session.cliente}}<br>
+
+<table width=800px>
+    
+    <tr>
+        <td>Id</td>
+        <td>valor </td>
+        <td>Quantidade </td>
+        <td>Sub_total </td>
+        
+    </tr>
+    {{ for lista in range(len(session.cart)): }}
+    <tr>
+        <td>{{ =session.cart[lista][0] }} </td>
+        <td>{{ =session.cart[lista][1] }} </td>
+        <td>{{ =session.cart[lista][2] }}</td>
+        <td>{{ =session.cart[lista][3] }}</td>
+    {{ pass }}
+    </tr>
+  
+</table>
+
+
+total{{ =session.sub }}
 {{end}}

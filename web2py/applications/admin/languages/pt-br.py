@@ -4,6 +4,7 @@
 '!langname!': 'Português Brasileiro',
 '"update" is an optional expression like "field1=\'newvalue\'". You cannot update or delete the results of a JOIN': '"update" é uma expressão opcional como "campo1=\'novo_valor\'". Não é permitido atualizar ou apagar resultados de um JOIN',
 '"User Exception" debug mode. ': '"User Exception" debug mode. ',
+'%d/%m/%Y': '%d/%m/%Y',
 '%s': '%s',
 '%s %%{row} deleted': '%s registros apagados',
 '%s %%{row} updated': '%s registros atualizados',

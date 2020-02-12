@@ -149,13 +149,13 @@ def vender():
 def sale():
     if not session.cart:
         session.cart = list()
+        session.cliente = ''
+        session.sub = 0
     query = ''
     product_query=''
     product = tuple()
     
-    
-    
-    
+ 
     form = SQLFORM.factory(
         Field('codigo', requires=IS_NOT_EMPTY(), label='Código')
         )
@@ -169,35 +169,26 @@ def sale():
     if form.process(formname='form').accepted:
         query = db(Clientes.id == form.vars.codigo).select()
         if query:
-            customer = query
-            print('cuuuustumer ', customer[0]['id'])
-            session.cliente = customer[0]['id']
-        else:
-            print('não encontrado')
-      
+            session.cliente = query
+            print('query id', query)
  
     if form_product.process(formname='form_product').accepted:
         product_query = db(Produtos.id == form_product.vars.product_id).select()
         quantidade = form_product.vars.quantidade
         if product_query:
             for i in range(len(product_query)):
-                #print(product_query[i]['id'])
-                #print(product_query[i]['valor'])
-                total = float(product_query[i]['valor']) * int(quantidade)
-                #print(total)
-                product = (product_query[i]['id'], product_query[i]['valor'], quantidade, total)
-                #print(product)
+                sub_total = float(product_query[i]['valor']) * float(quantidade)
+                session.sub = session.sub + sub_total
+                print(sub_total)
+                product = (product_query[i]['id'], product_query[i]['valor'], quantidade, sub_total)
+                print('produtos ',product)
                 session.cart.append(product)
-                print(len(session.cart))
-                for i in session.cart:
-                    print(i, '\n')
-        else:
-        
-            print('falhou')
-                
 
                  
-    return dict(form=form, form_product=form_product, product_query=product_query) 
+    return dict(form=form, form_product=form_product) 
+
+def finalizar():
+    pass
 
 #teste com data 
 def contando_data():
